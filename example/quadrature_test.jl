@@ -13,7 +13,7 @@ function _legendre(n,a,b)
     collect(zip(x,w))
 end
 
-function  duffy2D( rule)
+function duffy2D( rule)
    
     qps = _legendre(rule, 0.0, 1.0)
 
@@ -37,7 +37,7 @@ function  duffy2D( rule)
     return uP,wP
 end
 
-function  duffy3D(rule)
+function duffy3D(rule)
    
     qps = _legendre(rule, 0.0, 1.0)
 
@@ -64,7 +64,7 @@ function  duffy3D(rule)
 end
 
 
-function  duffy4D(rule)
+function duffy4D(rule)
    
     qps = _legendre(rule, 0.0, 1.0)
 
@@ -92,7 +92,7 @@ function  duffy4D(rule)
     return uP,wP
 end
 
-function  duffy5D(rule)
+function duffy5D(rule)
    
     qps = _legendre(rule, 0.0, 1.0)
 
@@ -183,22 +183,18 @@ println(sum(w))
 order = []
 err_ref =[]
 err_new =[]
-for k in 7:7
+for k in 6:6
     
 
-    #sh_ref = shunnham5D_ref(k)
-    #(x,w) = get_pts_wts(sh_ref,vertices)
-    #qps_ref = zip(x,w)
+    sh_ref = shunnham2D_ref(k)
+    (x,w) = get_pts_wts(sh_ref,vertices)
+    qps_ref = zip(x,w)
 
-    #println(sum(w))
-    
+    println(sum(w))
 
     sh_new = shunnham2D(k)
     (x,w) = get_pts_wts(sh_new,vertices)
     qps_new = zip(x,w)
-
-    #(x,w) = duffy2D(k)
-    #qps_new = zip(x,w)
 
     println(sum(w))
 
@@ -214,16 +210,16 @@ for k in 7:7
             #Refrence
             exact  =  sum(w*integrand(x) for (x,w) in qps_high)
 
-            #int_ref = sum(w*integrand(x) for (x,w) in qps_ref)
+            int_ref = sum(w*integrand(x) for (x,w) in qps_ref)
             int_new = sum(w*integrand(x) for (x,w) in qps_new)
 
             println(i," ",e)
             println(exact)
-            #println(int_ref)
+            println(int_ref)
             println(int_new)
 
             push!(order,i)
-            #push!(err_ref,abs(int_ref-exact))
+            push!(err_ref,abs(int_ref-exact))
             push!(err_new,abs(int_new-exact))
         end
       
@@ -235,7 +231,7 @@ end
 plot(size=(800,500),yaxis=:log)
 
 
-#scatter!(order,err_ref,label="Ref",markershape=:x)
+scatter!(order,err_ref,label="Ref",markershape=:x)
 scatter!(order,err_new,label="New",markershape=:o)
 
 
