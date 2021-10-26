@@ -171,20 +171,19 @@ end
 #Test Order
 exact=0.5
 
-#vertices = [[0 0], [1 0], [1 1]]
+vertices = [[0 0], [1 0], [1 1]]
 #vertices = [[0 0 0], [1 0 0], [1 1 0], [1 1 1]]
 #vertices = [[0 0 0 0], [1 0 0 0], [1 1 0 0], [1 1 1 0], [1 1 1 1]]
-vertices = [[0 0 0 0 0], [1 0 0 0 0], [1 1 0 0 0], [1 1 1 0 0], [1 1 1 1 0], [1 1 1 1 1]]
+#vertices = [[0 0 0 0 0], [1 0 0 0 0], [1 1 0 0 0], [1 1 1 0 0], [1 1 1 1 0], [1 1 1 1 1]]
 
-(x,w) = duffy5D(12)
+(x,w) = duffy2D(12)
 qps_high = zip(x,w)
 println(sum(w))
 
 order = []
 err_ref =[]
 err_new =[]
-for k in 5:5
-
+for k in 7:7
     
 
     #sh_ref = shunnham5D_ref(k)
@@ -194,18 +193,18 @@ for k in 5:5
     #println(sum(w))
     
 
-    #sh_new = shunnham3D_alt(k)
-    #(x,w) = get_pts_wts(sh_new,vertices)
-    #qps_new = zip(x,w)
-
-    (x,w) = duffy5D(k)
+    sh_new = shunnham2D(k)
+    (x,w) = get_pts_wts(sh_new,vertices)
     qps_new = zip(x,w)
+
+    #(x,w) = duffy2D(k)
+    #qps_new = zip(x,w)
 
     println(sum(w))
 
-    for i in 0:8
+    for i in 0:13
 
-        exponents = collect(multiexponents(5,i))
+        exponents = collect(multiexponents(2,i))
         println(length(exponents))
         for e in exponents
             function integrand(x)

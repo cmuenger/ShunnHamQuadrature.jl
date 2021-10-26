@@ -36,7 +36,7 @@ end
     return vol
 end
 
-export(get_pts_wts)
+export get_pts_wts
 
 function get_pts_wts(scheme::QScheme{N,T},  vertices::SMatrix{D,N,U}) where {N,T,D,U}
     @assert N > 0
@@ -75,14 +75,14 @@ end
 
 
 
-export(shunnham5D_new)
+export shunnham5D
 
-export(shunnham4D_new)
-export(shunnham4D_ref)
-export(shunnham3D_new)
-export(shunnham3D_ref)
-export(shunnham2D_new)
-export(shunnham2D_ref)
+export shunnham4D
+export shunnham4D_ref 
+export shunnham3D
+export shunnham3D_ref 
+export shunnham2D
+export shunnham2D_ref 
 
 
 """
@@ -91,7 +91,7 @@ Returns the n-th quadrature rule on the X-dimensional simplex. Returns a Qudarat
 the quadrature points in barycentric coordiantes and the normalized quadrature weights.
 """
 
-function shunnham5D_new(n)
+function shunnham5D(n)
     @assert 1 <= n <= length(hexateronAn)
     p = hexateronAn[n]
     w = hexateronWn[n]
@@ -108,7 +108,7 @@ function shunnham4D_ref(n)
     return QScheme(w, p)
 end
 
-function shunnham4D_new(n)
+function shunnham4D(n)
     @assert 1 <= n <= length(pentatopeAn)
     p = pentatopeAn[n]
     w = pentatopeWn[n]
@@ -125,7 +125,7 @@ function shunnham3D_ref(n)
     return QScheme(w, p)
 end
 
-function shunnham3D_new(n)
+function shunnham3D(n)
     @assert 1 <= n <= length(tetrahedronAn)
     p = tetrahedronAn[n]
     w = tetrahedronWn[n]
@@ -142,7 +142,7 @@ function shunnham2D_ref(n)
 end
 
 
-function shunnham2D_new(n)
+function shunnham2D(n)
     @assert 1 <= n <= length(triangleAn)
     p = triangleAn[n]
     w = triangleWn[n]
