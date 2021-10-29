@@ -1,5 +1,7 @@
 using StaticArrays
 
+#Quadrature rulesfrom Shunn&Ham Paper
+
 const tetrahedron1a = [
     SVector{4}([0.2500000000000000  0.2500000000000000  0.2500000000000000  0.2500000000000000])
 ]

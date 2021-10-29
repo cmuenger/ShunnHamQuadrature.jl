@@ -1,3 +1,7 @@
+using StaticArrays
+
+#Quadrature rulesfrom Shunn&Ham Paper
+
 const pentatope1a = [
     SVector{5}([0.2 0.2 0.2 0.2 0.2] ),
 ]

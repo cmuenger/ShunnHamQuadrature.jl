@@ -183,32 +183,30 @@ println(sum(w))
 order = []
 err_ref =[]
 err_new =[]
-<<<<<<< HEAD
 
 plot(size=(800,500),yaxis=:log)
-for k in 1:4
+for k in 1:6
     
-=======
-for k in 7:7    
->>>>>>> 0e71cf11fb9e11100e52f806f4c9006f5abebd9a
-
+    #=
     sh_ref = shunnham2D_ref(k)
     (x,w) = get_pts_wts(sh_ref,vertices)
     qps_ref = zip(x,w)
-
     println(sum(w))
+    =#
 
     sh_new = shunnham5D(k)
     (x,w) = get_pts_wts(sh_new,vertices)
     qps_new = zip(x,w)
 
     println(sum(w))
+
+
     order = []
     err_ref =[]
     err_new =[]
 
 
-    for i in 0:8
+    for i in 0:10
 
         exponents = collect(multiexponents(5,i))
         println(length(exponents))
@@ -220,16 +218,16 @@ for k in 7:7
             #Refrence
             exact  =  sum(w*integrand(x) for (x,w) in qps_high)
 
-            int_ref = sum(w*integrand(x) for (x,w) in qps_ref)
+            #int_ref = sum(w*integrand(x) for (x,w) in qps_ref)
             int_new = sum(w*integrand(x) for (x,w) in qps_new)
 
             println(i," ",e)
             println(exact)
-            println(int_ref)
+            #println(int_ref)
             println(int_new)
 
             push!(order,i)
-            push!(err_ref,abs(int_ref-exact))
+            #push!(err_ref,abs(int_ref-exact))
             push!(err_new,abs(int_new-exact))
         end
       
@@ -237,15 +235,7 @@ for k in 7:7
 
     scatter!(order,err_new,label=string(length(x))*"-Point Rule",markershape=Plots.supported_markers()[k+2])
 
-<<<<<<< HEAD
 end
-=======
-plot(size=(800,500),yaxis=:log)
-
-
-scatter!(order,err_ref,label="Ref",markershape=:x)
-scatter!(order,err_new,label="New",markershape=:o)
->>>>>>> 0e71cf11fb9e11100e52f806f4c9006f5abebd9a
 
 
 plot!(xlims=(-1,13),xticks=0:1:12,ylims=(1e-17,10),ylabel="Max. rel. error",xlabel="Max. degree of polynom",legend=:outerright, title="Order of 5D Shunn-Ham Quadratures")

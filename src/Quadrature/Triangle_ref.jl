@@ -1,5 +1,6 @@
 using StaticArrays
 
+#Quadrature rulesfrom Shunn&Ham Paper
 
 const triangle1a = [
     SVector{3}([0.333333333333333 0.333333333333333 0.333333333333333])
