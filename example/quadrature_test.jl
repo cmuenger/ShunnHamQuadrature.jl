@@ -183,8 +183,7 @@ println(sum(w))
 order = []
 err_ref =[]
 err_new =[]
-for k in 6:6
-    
+for k in 7:7    
 
     sh_ref = shunnham2D_ref(k)
     (x,w) = get_pts_wts(sh_ref,vertices)
