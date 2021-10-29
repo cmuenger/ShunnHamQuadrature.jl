@@ -171,19 +171,21 @@ end
 #Test Order
 exact=0.5
 
-vertices = [[0 0], [1 0], [1 1]]
+#vertices = [[0 0], [1 0], [1 1]]
 #vertices = [[0 0 0], [1 0 0], [1 1 0], [1 1 1]]
 #vertices = [[0 0 0 0], [1 0 0 0], [1 1 0 0], [1 1 1 0], [1 1 1 1]]
-#vertices = [[0 0 0 0 0], [1 0 0 0 0], [1 1 0 0 0], [1 1 1 0 0], [1 1 1 1 0], [1 1 1 1 1]]
+vertices = [[0 0 0 0 0], [1 0 0 0 0], [1 1 0 0 0], [1 1 1 0 0], [1 1 1 1 0], [1 1 1 1 1]]
 
-(x,w) = duffy2D(12)
+(x,w) = duffy5D(12)
 qps_high = zip(x,w)
 println(sum(w))
 
 order = []
 err_ref =[]
 err_new =[]
-for k in 7:7
+
+plot(size=(800,500),yaxis=:log)
+for k in 1:4
     
 
     #sh_ref = shunnham5D_ref(k)
@@ -193,7 +195,7 @@ for k in 7:7
     #println(sum(w))
     
 
-    sh_new = shunnham2D(k)
+    sh_new = shunnham5D(k)
     (x,w) = get_pts_wts(sh_new,vertices)
     qps_new = zip(x,w)
 
@@ -201,10 +203,14 @@ for k in 7:7
     #qps_new = zip(x,w)
 
     println(sum(w))
+    order = []
+    err_ref =[]
+    err_new =[]
 
-    for i in 0:13
 
-        exponents = collect(multiexponents(2,i))
+    for i in 0:8
+
+        exponents = collect(multiexponents(5,i))
         println(length(exponents))
         for e in exponents
             function integrand(x)
@@ -229,15 +235,10 @@ for k in 7:7
       
     end
 
+    scatter!(order,err_new,label=string(length(x))*"-Point Rule",markershape=Plots.supported_markers()[k+2])
+
 end
 
 
-plot(size=(800,500),yaxis=:log)
-
-
-#scatter!(order,err_ref,label="Ref",markershape=:x)
-scatter!(order,err_new,label="New",markershape=:o)
-
-
-plot!(xlims=(-1,13),xticks=0:1:12,ylims=(1e-17,10),ylabel="Max. rel. error",xlabel="Max. degree of polynom",legend=:outerright, title="Order of Shunn-Ham Quadrature")
+plot!(xlims=(-1,13),xticks=0:1:12,ylims=(1e-17,10),ylabel="Max. rel. error",xlabel="Max. degree of polynom",legend=:outerright, title="Order of 5D Shunn-Ham Quadratures")
 
