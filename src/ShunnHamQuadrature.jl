@@ -88,7 +88,7 @@ export shunnham2D_ref
 """
     shunnhamXD(n)
 Returns the n-th quadrature rule on the X-dimensional simplex. Returns a Qudarature Scheme with
-the quadrature points in barycentric coordiantes and the normalized quadrature weights.
+the quadrature points in barycentric coordiantes and  normalized quadrature weights.
 """
 
 function shunnham5D(n)
